@@ -11,10 +11,10 @@ export default class ReturnBar extends React.Component<IProps, {}> {
     return (
       <div className="return-bar">
         <LinkContainer to={this.props.returnTo}>
-          <Image src="/favicon.ico" />
+          <Image src="/home.png" />
         </LinkContainer>
         <LinkContainer to={"/"}>
-          <Image src="/favicon.ico" />
+          <Image src="/back-arrow.png" />
         </LinkContainer>
       </div>
     );

@@ -2,7 +2,7 @@ import socketIo from 'socket.io-client';
 import ChatMessage from './interfaces/chatmessage';
 import { Observable } from 'rxjs';
 
-const SERVER_URL = 'http://localhost:8080';
+const SERVER_URL = 'http://192.168.1.42:8080';
 
 export class SocketService {
     private socket!: SocketIOClient.Socket;

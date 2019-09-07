@@ -19,6 +19,11 @@ export default class Home extends React.Component<IProps, IState> {
                     path: "/message/",
                     name: "Message",
                     icon_path: "favicon.ico",
+                },
+                {
+                    path: "/message/",
+                    name: "App 2",
+                    icon_path: "favicon.ico",
                 }
             ]
         };

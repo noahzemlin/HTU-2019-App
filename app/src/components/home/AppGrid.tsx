@@ -16,26 +16,9 @@ export default class AppGrid extends React.Component<IProps, {}> {
                     <AppTile app={this.props.apps[0]}/>
                 </Col>
                 <Col xs={3}>
-                    <AppTile app={this.props.apps[0]}/>
+                    <AppTile app={this.props.apps[1]}/>
                 </Col>
-                <Col xs={3}>
-                    <AppTile app={this.props.apps[0]}/>
-                </Col>
-                <Col xs={3}>
-                    <AppTile app={this.props.apps[0]}/>
-                </Col>
-            </Row>
-            <Row className="justify-content-start AppGridRow">
-                <Col xs={3}>
-                    <AppTile app={this.props.apps[0]}/>
-                </Col>
-                <Col xs={3}>
-                    <AppTile app={this.props.apps[0]}/>
-                </Col>
-                <Col xs={3}>
-                    <AppTile app={this.props.apps[0]}/>
-                </Col>
-            </Row>
+             </Row>
         </Container>
     );
   }

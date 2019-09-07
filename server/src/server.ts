@@ -25,7 +25,13 @@ export class HTUServer {
         this.io.on('connect', (socket: any) => {
             console.log('Connected client on port %s.', config.port);
             socket.on('message', (m: ChatMessage) => {
-                console.log('[server](message): %s', JSON.stringify(m));
+                console.log('[Client](message): %s', JSON.stringify(m));
+                if (m.message !== "yeet") {
+                    m.message = "Sever response!";
+                } else {
+                    m.message = "Event from server";
+                }
+                console.log('[Sever](message): %s', JSON.stringify(m));
                 this.io.emit('message', m);
             });
 

@@ -24,11 +24,13 @@ code {
 }
 
 .imgbg-home {
-  background: url('monster_house.jpg');
+  background: #664400;
 }
 
 .imgbg-message-app {
-  background: green;
+  background: #004466;
+  padding: 10px;
+  color: white;
 }
 
 .AppGrid {
@@ -45,7 +47,8 @@ code {
 
 .return-bar {
   position: absolute;
-  bottom: 0;
+  left: 0px;
+  bottom: 0px;
   height: 10%;
   width: 100%;
   background: #444;
@@ -53,4 +56,12 @@ code {
   padding: 10px;
   display: flex;
   justify-content: space-between;
+}
+
+.return-bar img{
+  height: 100%;
+}
+
+.hidden {
+  visibility: hidden;
 }
