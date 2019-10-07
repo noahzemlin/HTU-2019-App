@@ -16,6 +16,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: url('wood.jpg')
 }
 
 code {
@@ -64,4 +65,13 @@ code {
 
 .hidden {
   visibility: hidden;
+}
+
+.gold-button {
+  width: 80%;
+  margin: 10%;
+}
+
+.gold-button:active {
+  filter: brightness(50%);
 }
