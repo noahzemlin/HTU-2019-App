@@ -1,5 +1,4 @@
 import socketIo from 'socket.io-client';
-import ChatMessage from './interfaces/chatmessage';
 import { Observable } from 'rxjs';
 
 const SERVER_URL = 'http://192.168.1.42:8080';
@@ -11,13 +10,13 @@ export class SocketService {
         this.socket = socketIo(SERVER_URL);
     }
 
-    public send(message: ChatMessage): void {
+    public send(message: string): void {
         this.socket.emit('message', message);
     }
 
-    public onMessage(): Observable<ChatMessage> {
-        return new Observable<ChatMessage>(observer => {
-            this.socket.on('message', (data: ChatMessage) => observer.next(data));
+    public onMessage(): Observable<string> {
+        return new Observable<string>(observer => {
+            this.socket.on('message', (data: string) => observer.next(data));
         });
     }
 
