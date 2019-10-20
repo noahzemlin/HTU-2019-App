@@ -28,12 +28,12 @@ export class HTUServer {
     }
 
     private listen(): void {
-        this.server.listen(443, () => {
-            console.log('Running server on port %s', 443);
+        this.server.listen(8080, () => {
+            console.log('Running server on port %s', 8080);
         });
 
         this.io.on('connect', (socket: any) => {
-            console.log('Connected client on port %s.', 443);
+            console.log('Connected client on port %s.', 8080);
 
             socket.on('message', (m: HTUMessage) => {
                 console.log('[Client](message): %s', JSON.stringify(m));
