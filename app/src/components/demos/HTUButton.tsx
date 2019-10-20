@@ -7,10 +7,28 @@ interface IProps {
     speed?: number;
 }
 
-export default class HTUButton extends React.Component<IProps, {}> {
+interface IState {
+  pressed: boolean;
+}
+
+export default class HTUButton extends React.Component<IProps, IState> {
+
+  constructor(props:any) {
+    super(props);
+    this.state = {pressed: false};
+  }
+  
+  handlePress() {
+    HTUServer.get().send({type: this.props.type, data: this.props.msg, channel: HTUServer.get().getChannel()});
+    
+    let newState: IState = this.state;
+    newState.pressed = true;
+    this.setState(newState);
+  }
+
   render() {
     return (
-        <div className="htu-button" style={{animationDuration: this.props.speed + "s"}} onClick={()=>{HTUServer.get().send({type: this.props.type, data: this.props.msg, channel: HTUServer.get().getChannel()})}}>
+        <div className={this.state.pressed ? "htu-button htu-button-pressed" : "htu-button"} style={{animationDuration: this.props.speed + "s"}} onClick={()=>this.handlePress()}>
             <div style={{animationDuration: this.props.speed + "s"}}>{this.props.children}</div>
         </div>
     );

@@ -88,7 +88,7 @@ code {
   opacity: 1.0;
 }
 
-.htu-button:active{
+.htu-button:hover{
   opacity: 0.5;
 }
 
