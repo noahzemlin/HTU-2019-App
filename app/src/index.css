@@ -1,7 +1,5 @@
 html, #root, .imgbg {
   height: 100%;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
 }
 
 body {
@@ -16,7 +14,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: url('future.jpeg')
 }
 
 code {
@@ -24,54 +21,74 @@ code {
     monospace;
 }
 
-.imgbg-home {
-  background: #664400;
-}
-
-.imgbg-message-app {
-  background: #004466;
-  padding: 10px;
-  color: white;
-}
-
-.AppGrid {
-  padding: 10%;
-}
-
-.AppGridRow {
-  padding: 5% 0%;
-}
-
-.AppTileText {
-  color: #ffffff;
-}
-
-.return-bar {
-  position: absolute;
-  left: 0px;
-  bottom: 0px;
-  height: 10%;
-  width: 100%;
-  background: #444;
-  color: #ddd;
-  padding: 10px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.return-bar img{
-  height: 100%;
-}
-
 .hidden {
   visibility: hidden;
 }
 
-.gold-button {
-  width: 80%;
-  margin: 10%;
+.main-menu {
+  text-align: center;
+  color: white;
 }
 
-.gold-button:active {
-  filter: brightness(50%);
+.main-menu button{
+  padding: 20px;
+  margin: 20px;
+}
+
+.poster {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-height: 90%;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359.9deg);
+  }
+}
+@keyframes crotation {
+  from {
+    transform: rotate(359.9deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+#dynamic-background {
+  position: relative;
+  overflow: hidden;
+  content: "";
+  position: absolute;
+  width: 250%;
+  height: 250%;
+  top: -75%;
+  left: -75%;
+  z-index: -1;
+  background: url('future.jpeg') 0 0 repeat;
+  background-size: 100%;
+  animation: rotation 120s infinite linear;
+}
+
+.htu-button {
+  background: url('button.png') 0 0 repeat;
+  background-size: 100%;
+  width: 200px;
+  height: 200px;
+  font-size: 6em;
+  font-family: Tahoma, Geneva, Verdana, sans-serif;
+  animation: rotation 10s infinite linear;
+  text-align: center;
+  line-height: 200px;
+  margin: 20% auto;
+}
+
+.htu-button div {
+  animation: crotation 10s infinite linear;
+  display: inline-block; 
+  margin: 0 auto;
 }
