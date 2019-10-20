@@ -6,6 +6,7 @@ const SERVER_URL = 'https://hturogue.tech:8080';
 
 export class SocketService {
     private socket!: SocketIOClient.Socket;
+    private channel: number = 1;
 
     public initSocket(): void {
         this.socket = socketIo(SERVER_URL, {secure: true});
@@ -15,9 +16,17 @@ export class SocketService {
         this.socket.emit('message', message);
     }
 
+    public setChannel(channel: number) {
+        this.channel = channel;
+    }
+
+    public getChannel(): number {
+        return this.channel
+    }
+
     public onMessage(): Observable<HTUMessage> {
         return new Observable<HTUMessage>(observer => {
-            this.socket.on('message', (data: HTUMessage) => observer.next(data));
+            this.socket.on('message', (data: HTUMessage) => {if (data.channel === this.channel) {observer.next(data);}});
         });
     }
 

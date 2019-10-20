@@ -10,7 +10,7 @@ interface IProps {
 export default class HTUButton extends React.Component<IProps, {}> {
   render() {
     return (
-        <div className="htu-button" style={{animationDuration: this.props.speed + "s"}} onClick={()=>{HTUServer.get().send({type: this.props.type, data: this.props.msg})}}>
+        <div className="htu-button" style={{animationDuration: this.props.speed + "s"}} onClick={()=>{HTUServer.get().send({type: this.props.type, data: this.props.msg, channel: HTUServer.get().getChannel()})}}>
             <div style={{animationDuration: this.props.speed + "s"}}>{this.props.children}</div>
         </div>
     );
