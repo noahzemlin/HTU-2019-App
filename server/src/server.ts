@@ -1,8 +1,9 @@
-import { createServer, Server } from 'http';
+import * as fs from 'fs';
 import * as express from 'express';
 import * as socketIo from 'socket.io';
 import { config } from './config';
 import HTUMessage from './models/htumessage';
+import { Server, createServer } from 'https';
 
 
 export class HTUServer {
@@ -12,7 +13,10 @@ export class HTUServer {
 
     constructor() {
         this.app = express();
-        this.server = createServer(this.app);
+        this.server = createServer({ 
+            key: fs.readFileSync('/etc/letsencrypt/live/hturogue.tech/privkey.pem'),
+            cert: fs.readFileSync('/etc/letsencrypt/live/hturogue.tech/fullchain.pem') 
+         }, this.app);
         this.io = socketIo(this.server);
         this.listen();
     }

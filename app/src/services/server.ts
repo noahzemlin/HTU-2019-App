@@ -8,7 +8,7 @@ export class SocketService {
     private socket!: SocketIOClient.Socket;
 
     public initSocket(): void {
-        this.socket = socketIo(SERVER_URL);
+        this.socket = socketIo(SERVER_URL, {secure: true});
     }
 
     public send(message: HTUMessage): void {
