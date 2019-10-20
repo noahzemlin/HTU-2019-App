@@ -1,22 +1,7 @@
 {
-  "short_name": "HTU 2019",
-  "name": "HTU 2019 App",
+  "short_name": "HTU Rogue",
+  "name": "HTU Rogue",
   "icons": [
-    {
-      "src": "img_128.png",
-      "type": "image/png",
-      "sizes": "128x128"
-    },
-    {
-      "src": "img_192.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "img_512.png",
-      "type": "image/png",
-      "sizes": "512x512"
-    },
     {
       "src": "favicon.ico",
       "sizes": "64x64 32x32 24x24 16x16",

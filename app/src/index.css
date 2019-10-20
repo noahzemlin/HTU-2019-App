@@ -1,7 +1,5 @@
 html, #root, .imgbg {
   height: 100%;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
 }
 
 body {
@@ -23,45 +21,97 @@ code {
     monospace;
 }
 
-.imgbg-home {
-  background: #664400;
+.hidden {
+  visibility: hidden;
 }
 
-.imgbg-message-app {
-  background: #004466;
-  padding: 10px;
+.main-menu {
+  text-align: center;
   color: white;
 }
 
-.AppGrid {
-  padding: 10%;
+.main-menu button{
+  padding: 20px;
+  margin: 20px;
 }
 
-.AppGridRow {
-  padding: 5% 0%;
+.poster {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-height: 90%;
 }
 
-.AppTileText {
-  color: #ffffff;
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359.9deg);
+  }
+}
+@keyframes crotation {
+  from {
+    transform: rotate(359.9deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
 }
 
-.return-bar {
+#dynamic-background {
+  position: relative;
+  overflow: hidden;
+  content: "";
   position: absolute;
-  left: 0px;
-  bottom: 0px;
-  height: 10%;
+  width: 250%;
+  height: 250%;
+  top: -75%;
+  left: -75%;
+  z-index: -1;
+  background: url('future.jpeg') 0 0 repeat;
+  background-size: 100%;
+  animation: rotation 120s infinite linear;
+}
+
+.htu-button {
+  background: url('button.png') 0 0 repeat;
+  background-size: 100%;
+  width: 200px;
+  height: 200px;
+  font-size: 6em;
+  font-family: Tahoma, Geneva, Verdana, sans-serif;
+  animation: rotation 10s infinite linear;
+  text-align: center;
+  line-height: 200px;
+  margin: 20% auto;
+  opacity: 1.0;
+}
+
+.htu-button:active{
+  opacity: 0.5;
+}
+
+.htu-button div {
+  animation: crotation 10s infinite linear;
+  display: inline-block; 
+  margin: 0 auto;
+  user-select: none;
+}
+
+@keyframes blink {
+  from {
+    color: red;
+  }
+  to {
+    color: white;
+  }
+}
+
+.two-choices-response {
+  font-size: 12em;
+  color: white;
+  animation: blink 1s linear;
+  text-align: center;
   width: 100%;
-  background: #444;
-  color: #ddd;
-  padding: 10px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.return-bar img{
-  height: 100%;
-}
-
-.hidden {
-  visibility: hidden;
 }

@@ -1,15 +1,27 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Redirect, Switch } from "react-router-dom";
-import Home from './components/home/Main';
-import MessageApp from './components/messageapp/Main';
+import ClientMain from './components/ClientMain';
+import { isMobile } from "react-device-detect";
+import Page404 from './components/pages/Page404';
+import TwoChoices from './components/demos/TwoChoices';
+import HTUServer from './services/server';
+import TwoChoicesHost from './components/demos/TwoChoicesHost';
+
 
 export default class App extends React.Component<{}, {}> {
+  constructor(props: any) {
+    super(props);
+
+    HTUServer.get().initSocket();
+  }
   render() {
     return (
       <Router>
         <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/message/" component={MessageApp} />
+          { isMobile && <Route exact path="/" component={ClientMain} /> }
+          { !isMobile && <Route exact path="/" component={Page404} /> }
+          <Route exact path="/two" component={TwoChoices} />
+          <Route exact path="/twoh" component={TwoChoicesHost} />
           <Route component={() => <Redirect to="/" />} />
         </Switch>
       </Router>
