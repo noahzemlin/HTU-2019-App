@@ -85,10 +85,33 @@ code {
   text-align: center;
   line-height: 200px;
   margin: 20% auto;
+  opacity: 1.0;
+}
+
+.htu-button:active{
+  opacity: 0.5;
 }
 
 .htu-button div {
   animation: crotation 10s infinite linear;
   display: inline-block; 
   margin: 0 auto;
+  user-select: none;
+}
+
+@keyframes blink {
+  from {
+    color: red;
+  }
+  to {
+    color: white;
+  }
+}
+
+.two-choices-response {
+  font-size: 12em;
+  color: white;
+  animation: blink 1s linear;
+  text-align: center;
+  width: 100%;
 }

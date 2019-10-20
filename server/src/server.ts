@@ -1,8 +1,8 @@
 import { createServer, Server } from 'http';
 import * as express from 'express';
 import * as socketIo from 'socket.io';
-import ChatMessage from './models/chatmessage';
 import { config } from './config';
+import HTUMessage from './models/htumessage';
 
 
 export class HTUServer {
@@ -24,13 +24,9 @@ export class HTUServer {
 
         this.io.on('connect', (socket: any) => {
             console.log('Connected client on port %s.', config.port);
-            socket.on('message', (m: ChatMessage) => {
+
+            socket.on('message', (m: HTUMessage) => {
                 console.log('[Client](message): %s', JSON.stringify(m));
-                if (m.message !== "yeet") {
-                    m.message = "Sever response!";
-                } else {
-                    m.message = "Event from server";
-                }
                 console.log('[Sever](message): %s', JSON.stringify(m));
                 this.io.emit('message', m);
             });

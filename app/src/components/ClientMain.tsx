@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Container, Col, Button } from 'react-bootstrap';
+import { Row, Container, Col } from 'react-bootstrap';
 import LinkButton from './LinkButton';
 
 interface IProps {
@@ -16,7 +16,7 @@ export default class ClientMain extends React.Component<IProps, {}> {
           </Row>
           <Row>
             <Col><LinkButton href="/two">Demo 1</LinkButton></Col>
-            <Col><LinkButton href="/two" disabled={true}>Demo 1</LinkButton></Col>
+            <Col><LinkButton href="/twoh">Demo 1</LinkButton></Col>
           </Row>
           <Row>
             <Col><LinkButton href="/yo" disabled={true}>Demo 2</LinkButton></Col>
