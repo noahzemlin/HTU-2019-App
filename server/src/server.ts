@@ -13,10 +13,17 @@ export class HTUServer {
 
     constructor() {
         this.app = express();
+
+        const privateKey = fs.readFileSync('/etc/letsencrypt/live/hturogue.tech/privkey.pem', 'utf8');
+        const certificate = fs.readFileSync('/etc/letsencrypt/live/hturogue.tech/cert.pem', 'utf8');
+        const ca = fs.readFileSync('/etc/letsencrypt/live/hturogue.tech/chain.pem', 'utf8');
+
         this.server = createServer({ 
-            key: fs.readFileSync('/etc/letsencrypt/live/hturogue.tech/privkey.pem'),
-            cert: fs.readFileSync('/etc/letsencrypt/live/hturogue.tech/fullchain.pem') 
+            key: privateKey,
+            cert: certificate,
+            ca: ca
          }, this.app);
+         
         this.io = socketIo(this.server);
         this.listen();
     }
