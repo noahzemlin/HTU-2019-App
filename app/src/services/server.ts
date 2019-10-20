@@ -2,7 +2,7 @@ import socketIo from 'socket.io-client';
 import { Observable } from 'rxjs';
 import HTUMessage from '../models/htumessage';
 
-const SERVER_URL = 'http://localhost:8080';
+const SERVER_URL = 'https://hturogue.tech:8080';
 
 export class SocketService {
     private socket!: SocketIOClient.Socket;
