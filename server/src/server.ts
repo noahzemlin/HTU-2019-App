@@ -1,7 +1,6 @@
 import * as fs from 'fs';
 import * as express from 'express';
 import * as socketIo from 'socket.io';
-import { config } from './config';
 import HTUMessage from './models/htumessage';
 import { Server, createServer } from 'https';
 
@@ -23,18 +22,18 @@ export class HTUServer {
             cert: certificate,
             ca: ca
          }, this.app);
-         
+
         this.io = socketIo(this.server);
         this.listen();
     }
 
     private listen(): void {
-        this.server.listen(config.port, () => {
-            console.log('Running server on port %s', config.port);
+        this.server.listen(443, () => {
+            console.log('Running server on port %s', 443);
         });
 
         this.io.on('connect', (socket: any) => {
-            console.log('Connected client on port %s.', config.port);
+            console.log('Connected client on port %s.', 443);
 
             socket.on('message', (m: HTUMessage) => {
                 console.log('[Client](message): %s', JSON.stringify(m));
