@@ -2,7 +2,7 @@
   "name": "react_lrn",
   "version": "0.1.0",
   "private": true,
-  "homepage" : "https://hturogue.tech",
+  "homepage": "https://hturogue.tech",
   "dependencies": {
     "@types/bootstrap": "^4.3.1",
     "@types/jest": "24.0.16",

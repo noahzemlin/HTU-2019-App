@@ -24,8 +24,7 @@ export default class TwoChoicesHost extends React.Component<IProps, IState> {
             }
             newState.cname = "";
             this.setState(newState);
-            newState.cname = "two-choices-response";
-            this.setState(newState);
+            setTimeout(() => {newState.cname = "two-choices-response"; this.setState(newState);}, 20);
         });
     }
 

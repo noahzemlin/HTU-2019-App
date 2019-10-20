@@ -30,15 +30,15 @@ export default class ClientMain extends React.Component<IProps, IState> {
         <Container className = "main-menu">
           <Row>
             <Col><h1>User</h1></Col>
-            <Col><h1>Host</h1></Col>
+            <Col><h1>Actor</h1></Col>
           </Row>
           <Row>
             <Col><LinkButton href="/two">Demo 1</LinkButton></Col>
             <Col><LinkButton href="/twoh">Demo 1</LinkButton></Col>
           </Row>
           <Row>
-            <Col><LinkButton href="/yo" disabled={true}>Demo 2</LinkButton></Col>
-            <Col><LinkButton href="/yo" disabled={true}>Demo 2</LinkButton></Col>
+            <Col><LinkButton href="/" disabled={true}>Demo 2</LinkButton></Col>
+            <Col><LinkButton href="/" disabled={true}>Demo 2</LinkButton></Col>
           </Row>
           <Row>
             <Col><Button disabled={this.state.channel === 1} onClick={()=>{this.setChannel(1)}}>Ch1</Button></Col>
