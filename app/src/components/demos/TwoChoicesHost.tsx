@@ -19,7 +19,6 @@ export default class TwoChoicesHost extends React.Component<IProps, IState> {
 
         HTUServer.get().onMessage().subscribe((data) => {
             let newState: IState = this.state;
-            console.log(data);
             if (data.type === 1) {
                 newState.message = data.data;
             }

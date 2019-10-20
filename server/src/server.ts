@@ -37,7 +37,6 @@ export class HTUServer {
 
             socket.on('message', (m: HTUMessage) => {
                 console.log('[Client](message): %s', JSON.stringify(m));
-                console.log('[Sever](message): %s', JSON.stringify(m));
                 this.io.emit('message', m);
             });
 
