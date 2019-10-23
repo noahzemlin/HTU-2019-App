@@ -2,14 +2,14 @@ import socketIo from 'socket.io-client';
 import { Observable } from 'rxjs';
 import HTUMessage from '../models/htumessage';
 
-const SERVER_URL = 'https://hturogue.tech:8080';
+const SERVER_URL = 'https://hturogue.tech/';
 
 export class SocketService {
     private socket!: SocketIOClient.Socket;
     private channel: number = 1;
 
     public initSocket(): void {
-        this.socket = socketIo(SERVER_URL, {secure: true});
+        this.socket = socketIo(SERVER_URL);
     }
 
     public send(message: HTUMessage): void {

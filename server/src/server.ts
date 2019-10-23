@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import * as express from 'express';
 import * as socketIo from 'socket.io';
 import HTUMessage from './models/htumessage';
-import { Server, createServer } from 'https';
+import { Server, createServer } from 'http';
 
 
 export class HTUServer {
@@ -13,27 +13,20 @@ export class HTUServer {
     constructor() {
         this.app = express();
 
-        const privateKey = fs.readFileSync('/etc/letsencrypt/live/hturogue.tech/privkey.pem', 'utf8');
-        const certificate = fs.readFileSync('/etc/letsencrypt/live/hturogue.tech/cert.pem', 'utf8');
-        const ca = fs.readFileSync('/etc/letsencrypt/live/hturogue.tech/chain.pem', 'utf8');
 
-        this.server = createServer({ 
-            key: privateKey,
-            cert: certificate,
-            ca: ca
-         }, this.app);
+        this.server = createServer(this.app);
 
         this.io = socketIo(this.server);
         this.listen();
     }
 
     private listen(): void {
-        this.server.listen(8080, () => {
-            console.log('Running server on port %s', 8080);
+        this.server.listen(8888, () => {
+            console.log('Running server on port %s', 8888);
         });
 
         this.io.on('connect', (socket: any) => {
-            console.log('Connected client on port %s.', 8080);
+            console.log('Connected client on port %s.', 8888);
 
             socket.on('message', (m: HTUMessage) => {
                 console.log('[Client](message): %s', JSON.stringify(m));
