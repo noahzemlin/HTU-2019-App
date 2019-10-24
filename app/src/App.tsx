@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Route, Redirect, Switch } from "react-router-d
 import { isMobile } from "react-device-detect";
 import Page404 from './components/pages/Page404';
 import HTUServer from './services/server';
-import MakeGroup from './components/demos/MakeGroup';
+import MakeGroup from './components/admin/MakeGroup';
 import CodePage from './components/CodePage';
-import ClientMain from './components/ClientMain';
-import AdminMain from './components/AdminMain';
+import ClientMain from './components/client/ClientMain';
+import AdminMain from './components/admin/AdminMain';
 import Logout from './components/Logout';
 
 export default class App extends React.Component<{}, {}> {

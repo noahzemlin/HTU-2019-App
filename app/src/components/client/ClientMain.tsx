@@ -1,9 +1,9 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
-import TwoChoices from './demos/TwoChoices';
-import HTUMessage from '../models/htumessage';
-import HTUServer from '../services/server';
-import TwoChoices2 from './demos/TwoChoices2';
+import TwoChoices from './TwoChoices';
+import HTUMessage from '../../models/htumessage';
+import HTUServer from '../../services/server';
+import TwoChoices2 from './TwoChoices2';
 
 interface IProps {
 

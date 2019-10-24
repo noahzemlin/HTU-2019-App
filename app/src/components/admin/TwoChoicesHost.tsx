@@ -1,7 +1,9 @@
 import React from 'react';
 import HTUServer from '../../services/server';
+import { Button } from 'react-bootstrap';
 
 interface IProps {
+    onBack: any;
 }
 
 interface IState {
@@ -30,6 +32,8 @@ export default class TwoChoicesHost extends React.Component<IProps, IState> {
         return (
             <div className={this.state.cname}>
                 {this.state.message}
+                <br />
+                <Button onClick={()=>this.props.onBack()}>Back</Button>
             </div>
         );
     }
