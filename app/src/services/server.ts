@@ -51,6 +51,10 @@ export class SocketService {
         return this.cookies.get(key);
     }
 
+    public wipe() {
+        this.cookies.remove('code');
+    }
+
     public send(type: string, message: HTUMessage): void {
         this.socket.emit(type, message);
     }
