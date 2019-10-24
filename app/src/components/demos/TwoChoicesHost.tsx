@@ -17,11 +17,9 @@ export default class TwoChoicesHost extends React.Component<IProps, IState> {
 
         this.state = {message: "", cname:"two-choices-response"};
 
-        HTUServer.get().onMessage().subscribe((data) => {
+        HTUServer.get().onEvent("message").subscribe((data) => {
             let newState: IState = this.state;
-            if (data.type === 1) {
-                newState.message = data.data;
-            }
+            newState.message = data.data;
             newState.cname = "";
             this.setState(newState);
             setTimeout(() => {newState.cname = "two-choices-response"; this.setState(newState);}, 20);

@@ -1,51 +1,44 @@
 import React from 'react';
-import { Row, Container, Col } from 'react-bootstrap';
-import LinkButton from './LinkButton';
-import { Button } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
+import TwoChoices from './demos/TwoChoices';
+import HTUMessage from '../models/htumessage';
 import HTUServer from '../services/server';
+import TwoChoices2 from './demos/TwoChoices2';
 
 interface IProps {
 
 }
 
 interface IState {
-  channel: number;
+  location: string;
 }
 
 export default class ClientMain extends React.Component<IProps, IState> {
-
   constructor(props: any) {
     super(props);
 
-    this.state = {channel: HTUServer.get().getChannel()};
-  }
+    this.state = {location: ""}
 
-  public setChannel(channel: number) {
-    HTUServer.get().setChannel(channel);
-    this.setState({channel: channel});
+    HTUServer.get().onEvent("switch-clients-action").subscribe((data: HTUMessage) => {
+      let newState: IState = this.state;
+      newState.location = data.data;
+      this.setState(newState);
+  });
   }
-
   render() {
+    if (this.state.location === "TwoChoices") {
+      return (
+        <TwoChoices/>
+      );
+    }
+    if (this.state.location === "TwoChoices2") {
+      return (
+        <TwoChoices2/>
+      );
+    }
     return (
         <Container className = "main-menu">
-          <Row>
-            <Col><h1>User</h1></Col>
-            <Col><h1>Actor</h1></Col>
-          </Row>
-          <Row>
-            <Col><LinkButton href="/two">Demo 1</LinkButton></Col>
-            <Col><LinkButton href="/twoh">Demo 1</LinkButton></Col>
-          </Row>
-          <Row>
-            <Col><LinkButton href="/" disabled={true}>Demo 2</LinkButton></Col>
-            <Col><LinkButton href="/" disabled={true}>Demo 2</LinkButton></Col>
-          </Row>
-          <Row>
-            <Col><Button disabled={this.state.channel === 1} onClick={()=>{this.setChannel(1)}}>Ch1</Button></Col>
-            <Col><Button disabled={this.state.channel === 2} onClick={()=>{this.setChannel(2)}}>Ch2</Button></Col>
-            <Col><Button disabled={this.state.channel === 3} onClick={()=>{this.setChannel(3)}}>Ch3</Button></Col>
-            <Col><Button disabled={this.state.channel === 4} onClick={()=>{this.setChannel(4)}}>Ch4</Button></Col>
-          </Row>
+          <h1>HTU: ROGUE</h1>
         </Container>
     );
   }

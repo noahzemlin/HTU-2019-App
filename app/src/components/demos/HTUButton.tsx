@@ -2,7 +2,6 @@ import React from 'react';
 import HTUServer from '../../services/server';
 
 interface IProps {
-    type: number;
     msg: string;
     speed?: number;
 }
@@ -19,7 +18,7 @@ export default class HTUButton extends React.Component<IProps, IState> {
   }
   
   handlePress() {
-    HTUServer.get().send({type: this.props.type, data: this.props.msg, channel: HTUServer.get().getChannel()});
+    HTUServer.get().send("message", {data: this.props.msg});
     
     let newState: IState = this.state;
     newState.pressed = true;

@@ -23,7 +23,8 @@
     "react-scripts": "3.0.1",
     "rxjs": "^6.5.2",
     "socket.io": "^2.2.0",
-    "typescript": "3.5.3"
+    "typescript": "3.5.3",
+    "universal-cookie": "^4.0.2"
   },
   "scripts": {
     "start": "react-scripts start",

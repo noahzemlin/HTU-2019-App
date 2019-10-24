@@ -1,38 +1,63 @@
 import socketIo from 'socket.io-client';
 import { Observable } from 'rxjs';
 import HTUMessage from '../models/htumessage';
+import Cookies from 'universal-cookie';
 
 const SERVER_URL = 'https://hturogue.tech/';
 
 export class SocketService {
     private socket!: SocketIOClient.Socket;
-    private channel: number = 1;
+    private cookies!: Cookies;
+
+    private role: string = "";
+    private _loaded: boolean = false;
 
     public initSocket(): void {
         this.socket = socketIo(SERVER_URL);
+        this.cookies = new Cookies();
+
+        const pot_code = this.cookies.get('code');
+
+        if (pot_code) {
+            console.log('Found existing code');
+            const sub = HTUServer.get().onEvent("auto-verify-response").subscribe((data) => {
+                if (data.data !== "no access") {
+                    this.role = data.data;
+                } else {
+                    this.cookies.remove('code');
+                }
+                this._loaded = true;
+                sub.unsubscribe();
+            });
+            HTUServer.get().send('auto-verify', {data: pot_code});
+        } else {
+            this._loaded = true;
+        }
     }
 
-    public send(message: HTUMessage): void {
-        this.socket.emit('message', message);
+    public getRole(): string {
+        return this.role;
     }
 
-    public setChannel(channel: number) {
-        this.channel = channel;
+    public loaded(): boolean {
+        return this._loaded;
     }
 
-    public getChannel(): number {
-        return this.channel
+    public setCookie(key: string, value: string) {
+        this.cookies.set(key, value);
     }
 
-    public onMessage(): Observable<HTUMessage> {
-        return new Observable<HTUMessage>(observer => {
-            this.socket.on('message', (data: HTUMessage) => {if (data.channel === this.channel) {observer.next(data);}});
-        });
+    public getCookie(key: string): string {
+        return this.cookies.get(key);
+    }
+
+    public send(type: string, message: HTUMessage): void {
+        this.socket.emit(type, message);
     }
 
     public onEvent(event: string): Observable<any> {
         return new Observable<HTUMessage>(observer => {
-            this.socket.on(event, () => observer.next());
+            this.socket.on(event, (data: HTUMessage) => observer.next(data));
         });
     }
 }
