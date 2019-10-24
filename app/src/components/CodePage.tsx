@@ -29,6 +29,7 @@ export default class CodePage extends React.Component<IProps, {}> {
 
   handleChange(e: any) {
     this.value = e.target.value;
+    this.value = this.value.toUpperCase();
   }
 
   render() {
