@@ -39,10 +39,12 @@ export class HTUServer {
 
                 if (m.group === "Android") {
                     this.android_pos = this.android_pos + 1;
+                    this.io.emit('switch-clients-action', {cyborg_pos: this.cyborg_pos, android_pos: this.android_pos});
                 }
 
                 if (m.group === "Cyborg") {
                     this.cyborg_pos = this.cyborg_pos + 1;
+                    this.io.emit('switch-clients-action', {cyborg_pos: this.cyborg_pos, android_pos: this.android_pos});
                 }
             });
 
