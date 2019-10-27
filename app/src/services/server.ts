@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import HTUMessage from '../models/htumessage';
 import Cookies from 'universal-cookie';
 
-const SERVER_URL = 'localhost:8888';
+const SERVER_URL = 'https://hturogue.tech/';
 
 export class SocketService {
     private socket!: SocketIOClient.Socket;
