@@ -126,6 +126,16 @@ export class HTUServer {
                 }
             });
 
+            socket.on('finish', (m: HTUMessage) => {
+                console.log('[Client](finish): %s', JSON.stringify(m));
+
+                if (m.data === "Android" && this.android_pos === 5) {
+                    this.android_pos = 0;
+                } else if (m.data === "Cyborg" && this.cyborg_pos === 5) {
+                    this.cyborg_pos = 0;
+                }
+            });
+
             socket.on('disconnect', () => {
                 console.log('Client disconnected');
             });
