@@ -31,6 +31,11 @@ export default class AdminMain extends React.Component<IProps, IState> {
     this.setState({page: view});
   }
 
+  handleLogOut() {
+    HTUServer.get().wipe();
+    window.location.reload();
+  }
+
   render() {
     if (this.state.page === "none") {
       return (
@@ -41,6 +46,8 @@ export default class AdminMain extends React.Component<IProps, IState> {
             <Button onClick={()=>{this.handleViewClick("ViewDec2")}}>Decision 2</Button>
             <Button onClick={()=>{this.handleViewClick("ViewDec3")}}>Decision 3</Button>
             <Button onClick={()=>{this.handleViewClick("GroupMaker")}}>Group Maker</Button>
+            <br />
+            <Button onClick={()=>{this.handleLogOut()}}>Log Out</Button>
           </Container>
       );
     }
