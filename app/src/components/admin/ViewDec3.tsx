@@ -24,7 +24,7 @@ export default class ViewDec3 extends React.Component<IProps, {}> {
         return (
             <div>
                 <Button disabled={HTUServer.get().android_pos !== 4} onClick={()=>{this.handleButtonClick({group: "Android", pos: 5})}}>Androids Coming</Button>
-                <Button disabled={HTUServer.get().android_pos !== 4} onClick={()=>{this.handleButtonClick({group: "Cyborg", pos: 5})}}>Cyborgs Coming</Button>
+                <Button disabled={HTUServer.get().cyborg_pos !== 4} onClick={()=>{this.handleButtonClick({group: "Cyborg", pos: 5})}}>Cyborgs Coming</Button>
                 <Button onClick={()=>this.props.onBack()}>Back</Button>
             </div>
         );
