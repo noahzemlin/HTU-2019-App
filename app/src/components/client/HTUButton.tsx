@@ -19,7 +19,7 @@ export default class HTUButton extends React.Component<IProps, IState> {
   }
   
   handlePress() {
-    HTUServer.get().send("message", {data: this.props.msg});
+    HTUServer.get().send("message", {data: this.props.msg, role: HTUServer.get().getRole()});
     
     let newState: IState = this.state;
     newState.pressed = true;

@@ -33,9 +33,17 @@ export class HTUServer {
         this.io.on('connect', (socket: socketIo.Socket) => {
             console.log('Connected client on port %s.', 8888);
 
-            socket.on('message', (m: HTUMessage) => {
+            socket.on('message', (m: any) => {
                 console.log('[Client](message): %s', JSON.stringify(m));
                 this.io.emit('message', m);
+
+                if (m.group === "Android") {
+                    this.android_pos = this.android_pos + 1;
+                }
+
+                if (m.group === "Cyborg") {
+                    this.cyborg_pos = this.cyborg_pos + 1;
+                }
             });
 
             socket.on('make-group', (m: HTUMessage) => {
