@@ -18,6 +18,7 @@ export default class App extends React.Component<{}, {}> {
 
   render() {
     if (!HTUServer.get().loaded()) {
+      console.log("waiting 4 load");
       setTimeout(() => {this.forceUpdate()}, 200);
       return (<div />);
     }

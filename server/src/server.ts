@@ -13,8 +13,10 @@ export class HTUServer {
 
     private keys: { [key: string]: any; } = {};
 
-    private android_client: any;
-    private cyborg_client: any;
+    private android_pos: number = 0;
+    private cyborg_pos: number = 0;
+
+    private client_to_type: { [key: string]: any; } = {};
 
     constructor() {
         this.app = express();
@@ -28,7 +30,7 @@ export class HTUServer {
             console.log('Running server on port %s', 8888);
         });
 
-        this.io.on('connect', (socket: any) => {
+        this.io.on('connect', (socket: socketIo.Socket) => {
             console.log('Connected client on port %s.', 8888);
 
             socket.on('message', (m: HTUMessage) => {
@@ -39,34 +41,89 @@ export class HTUServer {
             socket.on('make-group', (m: HTUMessage) => {
                 console.log('[Client](make-group): %s', JSON.stringify(m));
 
+                if (this.client_to_type[socket.id] !== "Admin")
+                    return;
+
                 const key: string = Math.random().toString(36).substring(4,8).toUpperCase();
                 this.keys[key] = m.data;
 
                 socket.emit('make-group-response', {data: key});
             });
 
-            socket.on('switch-clients', (m: HTUMessage) => {
+            socket.on('switch-clients', (m: any) => {
                 console.log('[Client](switch-clients): %s', JSON.stringify(m));
+
+                if (this.client_to_type[socket.id] !== "Admin")
+                    return;
+
+                if (m.group === "Cyborg"){
+                    if (!(m.pos === this.cyborg_pos + 1))
+                        return;
+                    this.cyborg_pos = m.pos;
+
+                    if (m.pos === 1 || m.pos === 3) {
+                        setTimeout(()=>{
+                            if (this.cyborg_pos === m.pos) {
+                                this.cyborg_pos = m.pos + 1;
+                                this.io.emit('switch-clients-action', {cyborg_pos: this.cyborg_pos, android_pos: this.android_pos});
+                            }
+                        }, 15000);
+                    }
+                }
+                if (m.group === "Android"){
+                    if (!(m.pos === this.android_pos + 1))
+                        return;
+                    this.android_pos = m.pos;
+                    
+                    if (m.pos === 1 || m.pos === 3) {
+                        setTimeout(()=>{
+                            if (this.android_pos === m.pos) {
+                                this.android_pos = m.pos + 1;
+                                this.io.emit('switch-clients-action', {cyborg_pos: this.cyborg_pos, android_pos: this.android_pos});
+                            }
+                        }, 15000);
+                    }
+                }
                 
-                this.io.emit('switch-clients-action', {data: m.data});
+                this.io.emit('switch-clients-action', {cyborg_pos: this.cyborg_pos, android_pos: this.android_pos});
             });
 
             socket.on('verify', (m: HTUMessage) => {
                 console.log('[Client](verify): %s', JSON.stringify(m));
 
-                if (this.keys[m.data])
-                    socket.emit('verify-response', {data: this.keys[m.data]});
+                if (this.keys[m.data]) {
+                    const role = this.keys[m.data];
+                    socket.emit('verify-response', {data: role});
+                    this.client_to_type[socket.id] = role;
+                }
+                else if (m.data === "99SPOOK") {
+                    const role = "Admin";
+                    socket.emit('verify-response', {data: role});
+                    this.client_to_type[socket.id] = role;
+                }
                 else
+                {
                     socket.emit('verify-response', {data: "no access"});
+                }
             });
 
             socket.on('auto-verify', (m: HTUMessage) => {
                 console.log('[Client](auto-verify): %s', JSON.stringify(m));
 
-                if (this.keys[m.data])
-                    socket.emit('auto-verify-response', {data: this.keys[m.data]});
+                if (this.keys[m.data]) {
+                    const role = this.keys[m.data];
+                    socket.emit('auto-verify-response', {data: role});
+                    this.client_to_type[socket.id] = role;
+                }
+                else if (m.data === "99SPOOK") {
+                    const role = "Admin";
+                    socket.emit('auto-verify-response', {data: role});
+                    this.client_to_type[socket.id] = role;
+                }
                 else
+                {
                     socket.emit('auto-verify-response', {data: "no access"});
+                }
             });
 
             socket.on('disconnect', () => {

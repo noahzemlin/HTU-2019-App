@@ -3,6 +3,7 @@ import HTUServer from '../../services/server';
 import { Row, Col, Form, Button } from 'react-bootstrap';
 
 interface IProps {
+    onBack: any;
 }
 
 interface IState {
@@ -38,6 +39,7 @@ export default class MakeGroup extends React.Component<IProps, IState> {
         return (
             <div style={{textAlign:  "center", fontSize: "1.5em"}}>
                 <h1>New Group Creation</h1>
+                <Button onClick={()=>this.props.onBack()}>Back</Button>
                 <Form>
                     <fieldset>
                         <Form.Group as={Row}>

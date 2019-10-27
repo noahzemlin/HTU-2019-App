@@ -4,6 +4,7 @@ import HTUServer from '../../services/server';
 interface IProps {
     msg: string;
     speed?: number;
+    cstyle?: string;
 }
 
 interface IState {
@@ -27,7 +28,7 @@ export default class HTUButton extends React.Component<IProps, IState> {
 
   render() {
     return (
-        <div className={this.state.pressed ? "htu-button htu-button-pressed" : "htu-button"} style={{animationDuration: this.props.speed + "s"}} onClick={()=>this.handlePress()}>
+        <div className={(this.state.pressed ? "htu-button htu-button-pressed " : "htu-button ") + this.props.cstyle} style={{animationDuration: this.props.speed + "s"}} onClick={()=>this.handlePress()}>
             <div style={{animationDuration: this.props.speed + "s"}}>{this.props.children}</div>
         </div>
     );

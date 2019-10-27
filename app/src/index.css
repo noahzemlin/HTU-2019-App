@@ -70,9 +70,9 @@ code {
   top: -75%;
   left: -75%;
   z-index: -1;
-  background: url('future.jpeg') 0 0 repeat;
+  background: url('PlexusLooped_3.gif') 0 0 repeat;
   background-size: 100%;
-  animation: rotation 120s infinite linear;
+  animation: rotation 60s infinite linear;
 }
 
 .htu-button {
@@ -87,6 +87,16 @@ code {
   line-height: 200px;
   margin: 20% auto;
   opacity: 1.0;
+}
+
+.htu-button-gold{
+  background: url('htu-gold.png') 0 0 repeat;
+  background-size: 100%;
+}
+
+.htu-button-silver{
+  background: url('htu-silver.png') 0 0 repeat;
+  background-size: 100%;
 }
 
 .htu-button:active{
@@ -110,7 +120,7 @@ code {
 }
 
 .two-choices-response {
-  font-size: 16em;
+  font-size: 12em;
   color: white;
   animation: blink 1s linear;
   text-align: center;

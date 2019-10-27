@@ -8,8 +8,8 @@ export default class TwoChoices2 extends React.Component<IProps, {}> {
   render() {
     return (
         <div>
-            <HTUButton msg="5">5</HTUButton>
-            <HTUButton msg="6" speed={6}>6</HTUButton>
+            <HTUButton cstyle="htu-button-gold" msg="gold"></HTUButton>
+            <HTUButton cstyle="htu-button-silver" msg="silver" speed={6}></HTUButton>
         </div>
     );
   }

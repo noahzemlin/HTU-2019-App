@@ -2,7 +2,10 @@ import React from 'react';
 import { Container } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import HTUServer from '../../services/server';
-import TwoChoicesHost from './TwoChoicesHost';
+import ViewDec1 from './ViewDec1';
+import MakeGroup from './MakeGroup';
+import ViewDec2 from './ViewDec2';
+import ViewDec3 from './ViewDec3';
 
 interface IProps {
 
@@ -34,16 +37,31 @@ export default class AdminMain extends React.Component<IProps, IState> {
           <Container className = "main-menu">
             <h1>HTU: ROGUE</h1>
             <h1>Admin</h1>
-            <Button onClick={()=>{this.handleButtonClick("TwoChoices")}}>Decision 1</Button>
-            <Button onClick={()=>{this.handleButtonClick("TwoChoices2")}}>Decision 2</Button>
-            <Button onClick={()=>{this.handleButtonClick("")}}>Blank</Button>
-            <Button onClick={()=>{this.handleViewClick("TwoChoices")}}>Viewer</Button>
+            <Button onClick={()=>{this.handleViewClick("ViewDec1")}}>Decision 1</Button>
+            <Button onClick={()=>{this.handleViewClick("ViewDec2")}}>Decision 2</Button>
+            <Button onClick={()=>{this.handleViewClick("ViewDec3")}}>Decision 3</Button>
+            <Button onClick={()=>{this.handleViewClick("GroupMaker")}}>Group Maker</Button>
           </Container>
       );
     }
-    if (this.state.page === "TwoChoices") {
+    if (this.state.page === "ViewDec1") {
       return (
-          <TwoChoicesHost onBack={()=>{this.handleViewClick("none")}}/>
+          <ViewDec1 onBack={()=>{this.handleViewClick("none")}}/>
+      );
+    }
+    if (this.state.page === "ViewDec2") {
+      return (
+          <ViewDec2 onBack={()=>{this.handleViewClick("none")}}/>
+      );
+    }
+    if (this.state.page === "ViewDec3") {
+      return (
+          <ViewDec3 onBack={()=>{this.handleViewClick("none")}}/>
+      );
+    }
+    if (this.state.page === "GroupMaker") {
+      return (
+          <MakeGroup onBack={()=>{this.handleViewClick("none")}}/>
       );
     }
   }
