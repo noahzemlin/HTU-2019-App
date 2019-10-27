@@ -29,7 +29,7 @@ export default class ClientMain extends React.Component<IProps, IState> {
         newState.location = data.cyborg_pos;
       }
       this.setState(newState);
-  });
+    });
   }
   render() {
     if (this.state.location === 1) {

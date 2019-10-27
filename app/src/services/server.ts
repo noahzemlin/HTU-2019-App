@@ -9,6 +9,9 @@ export class SocketService {
     private socket!: SocketIOClient.Socket;
     private cookies!: Cookies;
 
+    public android_pos: number = 0;
+    public cyborg_pos: number = 0;
+
     private role: string = "";
     private _loaded: boolean = false;
 
@@ -33,6 +36,11 @@ export class SocketService {
         } else {
             this._loaded = true;
         }
+
+        HTUServer.get().onEvent("switch-clients-action").subscribe((data: any) => {
+            this.android_pos = data.android_pos;
+            this.cyborg_pos = data.cyborg_pos;
+        });
     }
 
     public getRole(): string {
