@@ -139,9 +139,9 @@ export class HTUServer {
             socket.on('finish', (m: HTUMessage) => {
                 console.log('[Client](finish): %s', JSON.stringify(m));
 
-                if (m.data === "Android" && this.android_pos === 5) {
+                if (m.data === "Android") {
                     this.android_pos = 0;
-                } else if (m.data === "Cyborg" && this.cyborg_pos === 5) {
+                } else if (m.data === "Cyborg") {
                     this.cyborg_pos = 0;
                 }
 

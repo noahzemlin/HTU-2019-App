@@ -5,6 +5,7 @@ interface IProps {
     msg: string;
     speed?: number;
     cstyle?: string;
+    wipe?: boolean;
 }
 
 interface IState {
@@ -24,6 +25,11 @@ export default class HTUButton extends React.Component<IProps, IState> {
     let newState: IState = this.state;
     newState.pressed = true;
     this.setState(newState);
+
+    if (this.props.wipe) {
+      HTUServer.get().send('finish', {data: HTUServer.get().getRole()});
+      HTUServer.get().wipe();
+    }
   }
 
   render() {

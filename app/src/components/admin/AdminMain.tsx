@@ -44,7 +44,6 @@ export default class AdminMain extends React.Component<IProps, IState> {
             <h1>Admin</h1>
             <Button onClick={()=>{this.handleViewClick("ViewDec1")}}>Decision 1</Button>
             <Button onClick={()=>{this.handleViewClick("ViewDec2")}}>Decision 2</Button>
-            <Button onClick={()=>{this.handleViewClick("ViewDec3")}}>Decision 3</Button>
             <Button onClick={()=>{this.handleViewClick("GroupMaker")}}>Group Maker</Button>
             <br />
             <Button onClick={()=>{this.handleLogOut()}}>Log Out</Button>
