@@ -144,6 +144,8 @@ export class HTUServer {
                 } else if (m.data === "Cyborg" && this.cyborg_pos === 5) {
                     this.cyborg_pos = 0;
                 }
+
+                this.io.emit('switch-clients-action', {cyborg_pos: this.cyborg_pos, android_pos: this.android_pos});
             });
 
             socket.on('disconnect', () => {
