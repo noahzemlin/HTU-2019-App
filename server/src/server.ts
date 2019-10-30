@@ -13,8 +13,8 @@ export class HTUServer {
 
     private keys: { [key: string]: any; } = {};
 
-    private android_pos: number = 0;
-    private cyborg_pos: number = 0;
+    private android_pos: number = -1;
+    private cyborg_pos: number = -1;
 
     private client_to_type: { [key: string]: any; } = {};
 
@@ -23,6 +23,16 @@ export class HTUServer {
         this.server = createServer(this.app);
         this.io = socketIo(this.server);
         this.listen();
+    }
+
+    makeid(length: number): string {
+        var result = '';
+        var characters = 'ABCDEFGHJKMNPRSTWXYZ';
+        var charactersLength = characters.length;
+        for ( var i = 0; i < length; i++ ) {
+           result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+        return result;
     }
 
     private listen(): void {
@@ -54,7 +64,7 @@ export class HTUServer {
                 if (this.client_to_type[socket.id] !== "Admin")
                     return;
 
-                const key: string = Math.random().toString(36).substring(4,8).toUpperCase();
+                const key: string = this.makeid(4);
                 this.keys[key] = m.data;
 
                 socket.emit('make-group-response', {data: key});
@@ -105,6 +115,16 @@ export class HTUServer {
                     const role = this.keys[m.data];
                     socket.emit('verify-response', {data: role});
                     this.client_to_type[socket.id] = role;
+
+                    if (role === "Cyborg" && this.cyborg_pos === -1) {
+                        this.cyborg_pos = 0;
+                        this.io.emit('switch-clients-action', {cyborg_pos: this.cyborg_pos, android_pos: this.android_pos});
+                    }
+
+                    if (role === "Android" && this.android_pos === -1) {
+                        this.android_pos = 0;
+                        this.io.emit('switch-clients-action', {cyborg_pos: this.cyborg_pos, android_pos: this.android_pos});
+                    }
                 }
                 else if (m.data === "99SPOOK") {
                     const role = "Admin";
@@ -140,9 +160,9 @@ export class HTUServer {
                 console.log('[Client](finish): %s', JSON.stringify(m));
 
                 if (m.data === "Android") {
-                    this.android_pos = 0;
+                    this.android_pos = -1;
                 } else if (m.data === "Cyborg") {
-                    this.cyborg_pos = 0;
+                    this.cyborg_pos = -1;
                 }
 
                 this.io.emit('switch-clients-action', {cyborg_pos: this.cyborg_pos, android_pos: this.android_pos});

@@ -15,6 +15,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: white;
+  background-color: black;
 }
 
 code {
@@ -73,6 +74,8 @@ code {
   background: url('PlexusLooped_3.gif') 0 0 repeat;
   background-size: 100%;
   animation: rotation 60s infinite linear;
+  opacity: 0.4;
+  filter: alpha(opacity=40);
 }
 
 .htu-button {

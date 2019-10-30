@@ -29,6 +29,7 @@ export default class HTUButton extends React.Component<IProps, IState> {
     if (this.props.wipe) {
       HTUServer.get().send('finish', {data: HTUServer.get().getRole()});
       HTUServer.get().wipe();
+      setTimeout(() => {HTUServer.get().kill()}, 500);
     }
   }
 

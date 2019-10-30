@@ -9,8 +9,8 @@ export class SocketService {
     private socket!: SocketIOClient.Socket;
     private cookies!: Cookies;
 
-    public android_pos: number = 0;
-    public cyborg_pos: number = 0;
+    public android_pos: number = -1;
+    public cyborg_pos: number = -1;
 
     private role: string = "";
     private _loaded: boolean = false;
@@ -61,6 +61,10 @@ export class SocketService {
 
     public wipe() {
         this.cookies.remove('code');
+    }
+
+    public kill() {
+        this.socket.disconnect();
     }
 
     public send(type: string, message: any): void {

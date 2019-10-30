@@ -21,6 +21,10 @@ export default class AdminMain extends React.Component<IProps, IState> {
     super(props);
 
     this.state = {page: "none"};
+
+    const doc: any = document.getElementById('dynamic-background');
+    if (doc)
+      doc.outerHTML = "";
   }
 
   handleButtonClick(place:string) {
